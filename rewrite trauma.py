@@ -20,7 +20,7 @@ color_vpravo = ColorSensor(Port.S3)
 color_navigacni = ColorSensor(Port.S4)
 
 # drivebase
-robot = DriveBase(levy_motor, pravy_motor, 57, 226)
+robot = DriveBase(levy_motor, pravy_motor, 54, 87)
 
 def sleduj_caru():
     global cilova_hodnota_sledovani_cary, konstanta_p, zakladni_rychlost_pro_PID, cl_navigacni
