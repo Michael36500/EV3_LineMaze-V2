@@ -10,7 +10,7 @@ from pybricks.robotics import DriveBase
 # nastavení robota
 ev3 = EV3Brick()
 
-levy_motor = Motor(Port.D, positive_direction=Direction.COUNTERCLOCKWISE)
+levy_motor = Motor(Port.B, positive_direction=Direction.COUNTERCLOCKWISE)
 pravy_motor = Motor(Port.A, positive_direction=Direction.COUNTERCLOCKWISE)
 
 left_u = UltrasonicSensor(Port.S1)
@@ -51,11 +51,11 @@ while True:
     prava = right_u.distance()
 
     if leva > 50 or prava > 50:
-        pravy_motor.dc(100)
-        levy_motor.dc(100)
+        pravy_motor.dc(100//2)
+        levy_motor.dc(100//2)
 
     if leva < 300 and leva > 10 or prava < 300:
-        spd = 80
+        spd = 80 // 2
         toc = (prava - leva) // 10
 
         pravy_motor.dc(spd + toc)
