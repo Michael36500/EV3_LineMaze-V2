@@ -21,7 +21,7 @@ right_u = UltrasonicSensor(Port.S4)
 # robot.stop()
 # ev
 while True:   # type: ignore
-    if ev3.buttons.pressed() != []:
+    if ev3.buttons.pressed() != []: # type: ignore
         break
 
 time.sleep(5)
@@ -42,7 +42,7 @@ while True:
 
     # if prava > maxi + 5 and prava < 300:
     if prava < 250:
-        # time.sleep(0.05)
+        # time.sleep(0.05\)
         break
 
     # if leva < prava:
