@@ -9,13 +9,13 @@ from pybricks.robotics import DriveBase
 ev3 = EV3Brick()    
 
 # motory
-levy_motor = Motor(Port.C, positive_direction=Direction.COUNTERCLOCKWISE, gears=[12,20])
-pravy_motor = Motor(Port.D, positive_direction=Direction.COUNTERCLOCKWISE, gears=[12,20])
+levy_motor = Motor(Port.A, positive_direction=Direction.CLOCKWISE)
+pravy_motor = Motor(Port.B, positive_direction=Direction.CLOCKWISE)
 
 # senzory
-color_levy = ColorSensor(Port.S1)
-color_uprostred = ColorSensor(Port.S2)
-color_vpravo = ColorSensor(Port.S3)
+color_levy = ColorSensor(Port.S2)
+color_uprostred = ColorSensor(Port.S3)
+color_vpravo = ColorSensor(Port.S1)
 
 color_navigacni = ColorSensor(Port.S4)
 
@@ -32,13 +32,13 @@ def sleduj_caru():
     robot.drive(zakladni_rychlost_pro_PID, jak_moc_se_otocit)  # type: ignore
 def jsem_v_cili():
     # ev3.speaker.set_volume(100)
-    ev3.speaker.play_file("rickroll.mp3")
+    # ev3.speaker.beep(440, 200)
     pt.wait(10)
 
 def otoc_uturn():
     print("Uturn")
     ## vylaď
-    robot.turn(182)
+    robot.turn(180)
 def otoc_doprava():
     print("right")
     ## vylaď
@@ -361,7 +361,7 @@ precti_senzory_s_posunem()
 while True:
     precti_senzory_pod_sebou()
     sleduj_caru()
-    if check() == "out":
-        break
+    # if check() == "out":
+    #     break
 
 

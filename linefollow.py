@@ -10,11 +10,12 @@ from pybricks.robotics import DriveBase
 levy_motor = Motor(Port.B, positive_direction=Direction.CLOCKWISE)
 pravy_motor = Motor(Port.A, positive_direction=Direction.CLOCKWISE)
 # drivebase
-robot = DriveBase(levy_motor, pravy_motor, 54, 87)
+robot = DriveBase(levy_motor, pravy_motor, 54, 96)
+robot.settings(75, 502, 80, 662)
 # senzor
-color = ColorSensor(Port.S2)
-levy_col = ColorSensor(Port.S1)
-pravy_col = ColorSensor(Port.S4)
+color = ColorSensor(Port.S4)
+levy_col = ColorSensor(Port.S2)
+pravy_col = ColorSensor(Port.S1)
 #vojta vávra
 
 
@@ -42,28 +43,32 @@ def sleduj_caru():
     # pohyb
     turn = konstanta_p * error + konstanta_i * integral + konstanta_d * derivative
     robot.drive(zakladni_rychlost_pro_PID, turn)  # type: ignore
+def make_right():
+    print("right")
+    robot.straight(55)
+    robot.turn(-90)
+
+def make_left():
+    print("left")
+    robot.straight(55)
+    robot.turn( 90)
 
 def check():
     # levý senzor
     if levy_col.reflection() < cilova_hodnota_sledovani_cary - 20:
-        robot.straight(65)
-        robot.turn( 90)
-        exit()
-
+        make_left()
     # doprava
-    if pravy_col.reflection() < cilova_hodnota_sledovani_cary - 20:
-        robot.straight(70)
-        robot.turn(-90)
-        exit()
+    elif pravy_col.reflection() < cilova_hodnota_sledovani_cary - 20:
+        make_right()
 
 
-cilova_hodnota_sledovani_cary = 30
+cilova_hodnota_sledovani_cary = 50
 konstanta_p = 0.7
 konstanta_i = 0.2
 konstanta_d = 0.1
-zakladni_rychlost_pro_PID = 30
+zakladni_rychlost_pro_PID = 120
 error = 0
     
 while True:
     sleduj_caru()
-    check()
+    check() # poznámkuj tohle na 1. jízdu
