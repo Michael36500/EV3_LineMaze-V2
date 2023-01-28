@@ -17,7 +17,7 @@ right_u = UltrasonicSensor(Port.S1)
 
 
 # nastaví čekací hodnotu
-vyladeno = 0.260
+vyladeno = 0.35
 
 # čekám na zmáčknutí tlačítka
 while True:
@@ -46,22 +46,61 @@ while True:
     lft = left_u.distance()
     rgh = right_u.distance()
     mini = min([lft, rgh])
-    if mini > 500:
-        if lft == mini:
-            levy_motor.brake()
-            levy_motor_navic.brake()
-        if rgh == mini:
+
+    thresh = 500
+
+    if mini > thresh:
+        # otáčej se na místě, hledej
+        # doprava
+        levy_motor.track_target(360*1000)
+        levy_motor_navic.track_target(360*1000)
+        pravy_motor.track_target(-360*1000)
+        pravy_motor_navic.track_target(-360*1000)
+
+
+    if mini < thresh: # type: ignore
+        # jeď dopředu
+        levy_motor.track_target(360*1000)
+        levy_motor_navic.track_target(360*1000)
+        pravy_motor.track_target(360*1000)
+        pravy_motor_navic.track_target(360*1000)
+
+
+
+
+
+
+
+
+
+
+
+
 
 # while True:
-#     time.sleep(1)
-#     levy_motor.brake()
-#     pravy_motor.brake()
-#     time.sleep(0.1)
-    # levy_motor.track_target(360)
-    # pravy_motor.track_target(360)
-    # time.sleep(0.3)
-    # # time.sleep(1)
+#     lft = left_u.distance()
+#     rgh = right_u.distance()
+#     mini = min([lft, rgh])
+#     if mini > 500:
+#         if lft == mini:
+#             levy_motor.brake()
+#             levy_motor_navic.brake()
+#             pravy_motor.track_target(360*1000)
+#             pravy_motor_navic.track_target(360*1000)
 
+#         elif rgh == mini:
+#             pravy_motor.brake()
+#             pravy_motor_navic.brake()
+#             levy_motor.track_target(360*1000)
+#             levy_motor_navic.track_target(360*1000)
+
+#         else:
+#             # jedu rovně
+#             levy_motor.track_target(360*1000)
+#             levy_motor_navic.track_target(360*1000)
+#             pravy_motor.track_target(360*1000)
+#             pravy_motor_navic.track_target(360*1000)
+            
 
 
 
