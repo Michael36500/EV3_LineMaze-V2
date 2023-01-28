@@ -11,12 +11,12 @@ levy_motor = Motor(Port.B, positive_direction=Direction.COUNTERCLOCKWISE)
 pravy_motor = Motor(Port.A, positive_direction=Direction.COUNTERCLOCKWISE)
 
 speed = 5000
-vyladeno = 0.260
+vyladeno = 0.300
 while True:
     if ev3.buttons.pressed() != []: # type: ignore
         ev3.light.on(Color.RED)
         break
-time.sleep(4.9)
+time.sleep(5)
 
 
 levy_motor.track_target(360*1000)
